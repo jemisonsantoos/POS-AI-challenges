@@ -1,0 +1,22 @@
+{
+    "name": "movie-recommender-backend",
+    "version": "1.0.0",
+    "description": "Movie recommendation system with ChromaDB vector search — equal weight for age, likes and genre",
+    "main": "src/index.js",
+    "type": "module",
+    "scripts": {
+        "start": "docker compose -f ../docker-compose.yml up -d && sleep 5 && npm run seed && node src/index.js",
+        "dev": "node --watch src/index.js",
+        "seed": "node src/scripts/seed.js",
+        "stop": "kill $(lsof -ti:3001) 2>/dev/null; docker compose -f ../docker-compose.yml down",
+        "stop:all": "kill $(lsof -ti:5173) 2>/dev/null; kill $(lsof -ti:3001) 2>/dev/null; docker compose -f ../docker-compose.yml down; echo 'All stopped (frontend + backend + docker)'"
+    },
+    "keywords": ["movies", "chromadb", "vector-search", "recommendation"],
+    "license": "ISC",
+    "dependencies": {
+        "chromadb": "^1.9.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2"
+    }
+}

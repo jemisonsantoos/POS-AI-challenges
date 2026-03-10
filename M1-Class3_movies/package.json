@@ -1,0 +1,15 @@
+{
+    "name": "movie-recommender",
+    "private": true,
+    "version": "1.0.0",
+    "description": "Movie recommendation system — ChromaDB + Express + React (equal weight for age, likes and genre)",
+    "scripts": {
+        "start": "docker compose up -d && sleep 5 && npm run seed --prefix backend && npm run dev",
+        "dev": "npx concurrently -n back,front -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+        "seed": "npm run seed --prefix backend",
+        "stop": "kill $(lsof -ti:5173) 2>/dev/null; kill $(lsof -ti:3001) 2>/dev/null; docker compose down; echo '✓ All stopped (frontend + backend + docker)'"
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.2"
+    }
+}
